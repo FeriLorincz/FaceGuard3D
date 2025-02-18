@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">FaceGuard3D</string>
+    <string name="accessibility_service_label">FaceGuard3D Protection Service</string>
+    <string name="accessibility_service_description">Service used to protect your apps and content with facial recognition</string>
+    <string name="face_already_enrolled">Face Already Enrolled</string>
+    <string name="enroll_face">Enroll Face</string>
+    <string name="security_settings">Security Settings</string>
+    <string name="protected_apps">Protected Apps</string>
+    <string name="protected_files">Protected Files</string>
+    <string name="enrollment_instructions">Position your face within the frame and follow instructions</string>
+    <string name="enrollment_progress">Progress: %1$d/%2$d</string>
+    <string name="enrollment_complete">Face enrollment completed</string>
+    <string name="complete_enrollment">Complete Enrollment</string>
+    <string name="cancel_enrollment_title">Cancel Enrollment</string>
+    <string name="cancel_enrollment_message">Are you sure you want to cancel the enrollment?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="position_face_instructions">Position your face within the frame</string>
+    <string name="start_enrollment">Start Enrollment</string>
+    <string name="cancel">Cancel</string>
+    <string name="account_locked">Account locked. Try again in %d seconds</string>
+    <string name="no_backup_password_set">No backup password has been set</string>
+    <string name="too_many_attempts">Too many failed attempts. Account locked.</string>
+    <string name="invalid_password">Invalid password. %d attempts remaining</string>
+
+
+</resources>
