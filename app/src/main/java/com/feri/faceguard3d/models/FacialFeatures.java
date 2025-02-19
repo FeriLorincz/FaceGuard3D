@@ -118,7 +118,78 @@ public class FacialFeatures {
         return lightingCondition >= 0.4f && lightingCondition <= 0.9f;
     }
 
+
+    // Getteri
+    public float[] getEmbedding() {
+        return embedding;
+    }
+
+    public float[] getLandmarks() {
+        return landmarks;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public float getLightingCondition() {
+        return lightingCondition;
+    }
+
+    public List<String> getFacialAttributes() {
+        return facialAttributes;
+    }
+
+    public float[] getPose3D() {
+        return pose3D;
+    }
+
+    public boolean hasGlasses() {
+        return hasGlasses;
+    }
+
+    public boolean hasBeard() {
+        return hasBeard;
+    }
+
     public float getConfidence() {
         return confidence;
+    }
+
+    // Setteri
+    public void setEmbedding(float[] embedding) {
+        this.embedding = embedding;
+    }
+
+    public void setLandmarks(float[] landmarks) {
+        this.landmarks = landmarks;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public void setLightingCondition(float lightingCondition) {
+        this.lightingCondition = lightingCondition;
+    }
+
+    public void setFacialAttributes(List<String> facialAttributes) {
+        this.facialAttributes = facialAttributes;
+    }
+
+    public void setPose3D(float[] pose3D) {
+        this.pose3D = pose3D;
+    }
+
+    public void setHasGlasses(boolean hasGlasses) {
+        this.hasGlasses = hasGlasses;
+    }
+
+    public void setHasBeard(boolean hasBeard) {
+        this.hasBeard = hasBeard;
+    }
+
+    public void setConfidence(float confidence) {
+        this.confidence = confidence;
     }
 }

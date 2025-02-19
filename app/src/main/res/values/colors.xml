@@ -2,4 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="encrypted">#FF0000</color>  <!-- roșu pentru fișiere criptate -->
+    <color name="decrypted">#4CAF50</color>  <!-- verde pentru fișiere decriptate -->
+    <color name="primary">#1976D2</color>
+    <color name="gray">#757575</color>
+    <color name="color_error">#F44336</color>
+    <color name="scrim">#99000000</color>
+
 </resources>

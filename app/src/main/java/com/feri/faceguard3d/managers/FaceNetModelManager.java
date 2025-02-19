@@ -30,7 +30,7 @@ public class FaceNetModelManager {
     private Interpreter interpreter;
     private ByteBuffer inputBuffer;
     private float[][] embeddingBuffer;
-    private final Map<String, Object[]> outputMap;
+    private final Map<Integer, Object[]> outputMap;
 
     private static volatile FaceNetModelManager instance;
 
@@ -71,7 +71,16 @@ public class FaceNetModelManager {
         inputBuffer.order(ByteOrder.nativeOrder());
 
         embeddingBuffer = new float[BATCH_SIZE][EMBEDDING_SIZE];
-        outputMap.put("output", new Object[]{embeddingBuffer});
+        outputMap.put(0, new Object[]{embeddingBuffer});
+    }
+
+    private void runInference() {
+        // Creăm un map temporar cu tipul corect pentru inferență
+        Map<Integer, Object> outputs = new HashMap<>();
+        outputs.put(0, embeddingBuffer);
+
+        // Rulăm inferența
+        interpreter.runForMultipleInputsOutputs(new Object[]{inputBuffer}, outputs);
     }
 
     public float[] generateEmbedding(Bitmap face, Face mlkitFace) {
@@ -88,9 +97,8 @@ public class FaceNetModelManager {
             // Convertește imaginea în ByteBuffer
             convertBitmapToBuffer(normalizedFace);
 
-            // Rulează inferența
-            interpreter.runForMultipleInputsOutputs(
-                    new Object[]{inputBuffer}, outputMap);
+            // Rulează inferența folosind noua metodă
+            runInference();
 
             // Normalizează embedding-ul
             float[] embedding = normalizeEmbedding(embeddingBuffer[0]);

@@ -1,6 +1,7 @@
 package com.feri.faceguard3d.utils;
 
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
@@ -14,6 +15,8 @@ import androidx.annotation.OptIn;
 import androidx.camera.core.ImageProxy;
 
 import com.google.mlkit.vision.face.Face;
+import com.google.mlkit.vision.face.FaceLandmark;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,6 +24,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
+import java.util.List;
 
 import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
@@ -99,12 +103,13 @@ public class ImageUtils {
 
     public static MappedByteBuffer loadModelFile(Context context, String modelPath)
             throws IOException {
-        String modelFile = context.getAssets().openFd(modelPath).toString();
-        FileInputStream inputStream = new FileInputStream(new File(modelFile));
-        FileChannel fileChannel = inputStream.getChannel();
-        long startOffset = 0;
-        long declaredLength = fileChannel.size();
-        return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength);
+        try (AssetFileDescriptor fileDescriptor = context.getAssets().openFd(modelPath);
+             FileInputStream inputStream = new FileInputStream(new File(fileDescriptor.toString()))) {
+            FileChannel fileChannel = inputStream.getChannel();
+            long startOffset = 0;
+            long declaredLength = fileChannel.size();
+            return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength);
+        }
     }
 
     public static Bitmap normalizeImage(Bitmap original) {
@@ -146,26 +151,61 @@ public class ImageUtils {
     }
 
     public static void alignFacialLandmarks(MatOfPoint2f sourceLandmarks,
-                                            MatOfPoint2f targetLandmarks, Mat image) {
-        // Calculează transformarea afină
-        Mat transform = Imgproc.estimateAffinePartial2D(sourceLandmarks, targetLandmarks);
+                                            MatOfPoint2f targetLandmarks,
+                                            Mat image) {
+        try {
+            // Obținem punctele din MatOfPoint2f
+            float[] sourcePoints = new float[6]; // 3 puncte x 2 coordonate (x,y)
+            float[] targetPoints = new float[6];
 
-        if (transform != null) {
-            // Aplică transformarea
-            Mat result = new Mat();
-            Imgproc.warpAffine(image, result, transform, image.size());
-            result.copyTo(image);
+            sourceLandmarks.get(0, 0, sourcePoints);
+            targetLandmarks.get(0, 0, targetPoints);
+
+            // Creăm punctele pentru transformare
+            Point[] srcPoints = new Point[3];
+            Point[] dstPoints = new Point[3];
+
+            for(int i = 0; i < 3; i++) {
+                srcPoints[i] = new Point(sourcePoints[i*2], sourcePoints[i*2 + 1]);
+                dstPoints[i] = new Point(targetPoints[i*2], targetPoints[i*2 + 1]);
+            }
+
+            // Creăm MatOfPoint2f cu cele 3 puncte pentru transformare
+            MatOfPoint2f srcTri = new MatOfPoint2f(
+                    srcPoints[0], srcPoints[1], srcPoints[2]
+            );
+            MatOfPoint2f dstTri = new MatOfPoint2f(
+                    dstPoints[0], dstPoints[1], dstPoints[2]
+            );
+
+            // Obținem matricea de transformare
+            Mat transform = Imgproc.getAffineTransform(srcTri, dstTri);
+
+            if (transform != null) {
+                Mat result = new Mat();
+                Imgproc.warpAffine(image, result, transform, image.size());
+                result.copyTo(image);
+
+                // Eliberăm resursele
+                transform.release();
+                result.release();
+                srcTri.release();
+                dstTri.release();
+            }
+        } catch (Exception e) {
+            Log.e("ImageUtils", "Error in alignFacialLandmarks: " + e.getMessage());
         }
     }
 
     public static Point[] getLandmarkPoints(Face face) {
-        if (face.getLandmarks() == null) return new Point[0];
+        List<FaceLandmark> faceLandmarks = face.getAllLandmarks();
+        if (faceLandmarks == null || faceLandmarks.isEmpty()) return new Point[0];
 
-        Point[] points = new Point[face.getLandmarks().size()];
-        for (int i = 0; i < face.getLandmarks().size(); i++) {
+        Point[] points = new Point[faceLandmarks.size()];
+        for (int i = 0; i < faceLandmarks.size(); i++) {
             points[i] = new Point(
-                    face.getLandmarks().get(i).getPosition().x,
-                    face.getLandmarks().get(i).getPosition().y
+                    faceLandmarks.get(i).getPosition().x,
+                    faceLandmarks.get(i).getPosition().y
             );
         }
         return points;
@@ -190,7 +230,9 @@ public class ImageUtils {
         Image mediaImage = image.getImage();
         if (mediaImage == null) return null;
 
-        Image.Plane[] planes = image.getPlanes();
+        ImageProxy.PlaneProxy[] proxyPlanes = image.getPlanes();
+        Image.Plane[] planes = mediaImage.getPlanes();
+
         ByteBuffer yBuffer = planes[0].getBuffer();
         ByteBuffer uBuffer = planes[1].getBuffer();
         ByteBuffer vBuffer = planes[2].getBuffer();

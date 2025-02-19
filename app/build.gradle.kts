@@ -16,6 +16,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         ndk {
+            //abiFilters.addAll(listOf("armeabi-v7a", "arm64-v8a"))
             abiFilters += listOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
         }
 
@@ -28,10 +29,13 @@ android {
                     "proguard-rules.pro"
                 )
             }
+
+            debug {
+                isDebuggable = true
+                isJniDebuggable = true
+                isRenderscriptDebuggable = true
+            }
         }
-
-        //sourceSets["main"].jniLibs.srcDirs("src/main/jniLibs")
-
         compileOptions {
             sourceCompatibility = JavaVersion.VERSION_1_8
             targetCompatibility = JavaVersion.VERSION_1_8
@@ -41,7 +45,35 @@ android {
             viewBinding = true
         }
 
-        sourceSets["main"].jniLibs.srcDir("src/main/jniLibs")
+        //sourceSets["main"].jniLibs.srcDir("src/main/jniLibs")
+
+        sourceSets {
+            getByName("main") {
+                // Șterge sau comentează această linie dacă există
+                //jniLibs.srcDirs("${project.rootDir}/opencv/OpenCV-android-sdk/sdk/native/libs")
+            }
+        }
+
+        packaging {
+            resources {
+                excludes += listOf(
+                    "META-INF/native-image/**",
+                    "META-INF/*.json",
+                    "META-INF/DEPENDENCIES",
+                    "META-INF/LICENSE",
+                    "META-INF/LICENSE.txt",
+                    "META-INF/license.txt",
+                    "META-INF/NOTICE",
+                    "META-INF/NOTICE.txt",
+                    "META-INF/notice.txt",
+                    "META-INF/ASL2.0",
+                    "META-INF/*.kotlin_module"
+                )
+                pickFirsts += listOf(
+                    "org/opencv/android/FpsMeter.class"
+                )
+            }
+        }
 
         dependencies {
 
@@ -73,7 +105,7 @@ android {
             annotationProcessor("androidx.room:room-compiler:2.6.1")
 
             // OpenCV pentru procesare imagine
-            implementation("org.opencv:opencv-android:4.8.0")
+           // implementation("org.opencv:opencv-android:4.8.0")
             implementation("org.bytedeco:javacv-platform:1.5.9")
             implementation("org.bytedeco:opencv:4.7.0-1.5.9")
 
@@ -103,8 +135,9 @@ android {
 
             implementation("androidx.security:security-crypto:1.1.0-alpha06")
 
-            implementation(files("${project.rootDir}/opencv-4.10.0-android-sdk/OpenCV-android-sdk/sdk/java/src"))
-            implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+            //implementation(files("${project.rootDir}/opencv-4.10.0-android-sdk/OpenCV-android-sdk/sdk/java/src"))
+            //implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+            implementation (project(":opencv"))
         }
     }
 }

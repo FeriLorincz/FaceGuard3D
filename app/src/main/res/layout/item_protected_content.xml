@@ -19,6 +19,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:padding="4dp"
+            android:contentDescription="@string/content_icon"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -62,6 +63,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:textSize="12sp"
+            android:text="@string/encrypted_status"
+            android:contentDescription="@string/encryption_status_description"
             app:chipMinHeight="24dp"
             app:chipIconEnabled="true"
             app:layout_constraintStart_toStartOf="@id/tvContentName"

@@ -73,6 +73,7 @@
             android:id="@+id/btnCapture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/switch_camera"
             android:src="@drawable/ic_camera"
             app:fabSize="normal" />
 

@@ -23,5 +23,138 @@
     <string name="too_many_attempts">Too many failed attempts. Account locked.</string>
     <string name="invalid_password">Invalid password. %d attempts remaining</string>
 
+    <string name="auth_success">Authentication - success</string>
+    <string name="auth_failed">Authentication - failure: %1$s</string>
+    <string name="multiple_faces_detected">Multiple faces detected</string>
+    <string name="auth_error">Authentication error: %1$s</string>
+
+    <string name="hidden_content">Hidden Content</string>
+    <string name="error_revealing_content">Error revealing content</string>
+    <string name="remove_protection">Remove Protection</string>
+    <string name="remove_protection_confirm">Confirm removing protection for %1$s?</string>
+    <string name="remove">Remove</string>
+
+    <string name="app_protection_enabled">Protection enabled for %1$s</string>
+    <string name="app_protection_disabled">Protection disabled for %1$s</string>
+    <string name="no_apps_found">No applications found</string>
+
+    <string name="pick_file">Select File</string>
+    <string name="pick_image">Select Image</string>
+    <string name="pick_video">Select Video</string>
+    <string name="select_content_type">Select Content Type</string>
+    <string name="error_file_path">Could not determine file path</string>
+    <string name="file_protected_success">File protected successfully</string>
+    <string name="error_protecting_file">Error protecting file</string>
+    <string name="file_encrypted">File is encrypted</string>
+    <string name="protection_removed">Protection removed</string>
+    <string name="permissions_required">Storage permissions are required</string>
+    <!-- Security Settings Strings -->
+    <string name="adaptive_learning_enabled">Adaptive learning enabled</string>
+    <string name="adaptive_learning_disabled">Adaptive learning disabled</string>
+    <string name="reenroll_face_title">Re-enroll Face</string>
+    <string name="reenroll_face_message">Do you want to re-enroll your face? This will replace your current facial data.</string>
+    <string name="reenroll">Re-enroll</string>
+    <string name="multi_face_detection_enabled">Multiple face detection enabled</string>
+    <string name="multi_face_detection_disabled">Multiple face detection disabled</string>
+    <string name="clear_learning_data_title">Clear Learning Data</string>
+    <string name="clear_learning_data_message">Are you sure you want to clear all facial learning data? This cannot be undone.</string>
+    <string name="clear">Clear</string>
+    <string name="learning_data_cleared">Learning data has been cleared</string>
+    <string name="enter_new_password">Enter new backup password</string>
+    <string name="update_backup_password">Update Backup Password</string>
+    <string name="update">Update</string>
+    <string name="password_updated">Password updated successfully</string>
+    <string name="password_too_short">Password must be at least 6 characters long</string>
+    <string name="reset_settings_title">Reset All Settings</string>
+    <string name="reset_settings_message">Are you sure you want to reset all security settings? This will remove all protected apps and files.</string>
+    <string name="reset">Reset</string>
+    <string name="settings_reset_complete">All settings have been reset</string>
+    <!-- Protected Files Types -->
+    <string name="type_image">Image</string>
+    <string name="type_video">Video</string>
+    <string name="type_file">File</string>
+    <string name="type_contact">Contact</string>
+    <string name="type_text">Text</string>
+    <string name="type_unknown">Unknown</string>
+    <string name="encrypted">Encrypted</string>
+    <string name="decrypted">Decrypted</string>
+    <string name="hidden_on">Hidden on %1$s</string>
+
+    <string name="content_protection_active">Content Protection Active</string>
+    <string name="monitoring_protected_content">Monitoring protected content</string>
+
+    <!-- Backup Authentication -->
+    <string name="backup_auth_title">Backup Authentication</string>
+    <string name="backup_auth_description">Please enter your backup password to continue</string>
+    <string name="enter_backup_password">Enter backup password</string>
+    <string name="authenticate">Authenticate</string>
+    <string name="contact_admin">Forgot password? Contact administrator</string>
+
+    <!-- Face Authentication -->
+    <string name="authenticating">Authenticating %H8230</string>
+    <string name="use_backup_auth">Use Backup Authentication</string>
+
+    <!-- Hidden Content -->
+    <string name="no_hidden_content">No hidden content available</string>
+    <string name="hide_content">Hide Content</string>
+    <string name="all">All</string>
+    <string name="files">Files</string>
+    <string name="images">Images</string>
+    <string name="videos">Videos</string>
+
+    <!-- Protected Apps -->
+    <string name="no_apps_available">No applications available</string>
+
+    <!-- Protected Files -->
+    <string name="no_protected_files">No protected files</string>
+
+    <!-- Security Settings -->
+    <string name="facial_recognition_settings">Facial Recognition Settings</string>
+    <string name="enable_adaptive_learning">Enable Adaptive Learning</string>
+    <string name="reenroll_face">Re-enroll Face</string>
+    <string name="app_protection_settings">App Protection Settings</string>
+    <string name="enable_multi_face_detection">Enable Multiple Face Detection</string>
+    <string name="manage_protected_apps">Manage Protected Apps</string>
+    <string name="manage_protected_files">Manage Protected Files</string>
+    <string name="privacy_settings">Privacy Settings</string>
+    <string name="hide_protected_app_notifications">Hide Protected App Notifications</string>
+    <string name="hide_app_thumbnails">Hide App Thumbnails in Recents</string>
+    <string name="advanced_settings">Advanced Settings</string>
+    <string name="clear_learning_data">Clear Learning Data</string>
+    <string name="reset_all_settings">Reset All Settings</string>
+
+    <!-- Dialog Backup Auth -->
+    <string name="backup_authentication">Backup Authentication</string>
+    <string name="enter_backup_password_desc">Please enter your backup password</string>
+    <string name="password">Password</string>
+    <string name="add_protected_file">Add Protected File</string>
+
+    <!-- Face Capture -->
+    <string name="face_capture_instructions">Position your face within the frame</string>
+    <string name="switch_camera">Switch Camera</string>
+    <string name="toggle_flash">Toggle Flash</string>
+
+    <!-- Face Preview -->
+    <string name="face_preview">Face Preview</string>
+    <string name="retake">Retake</string>
+    <string name="confirm">Confirm</string>
+
+    <!-- Chip Text -->
+    <string name="pose_good">Good Pose</string>
+    <string name="pose_bad">Adjust Pose</string>
+    <string name="lighting_good">Good Lighting</string>
+    <string name="lighting_bad">Poor Lighting</string>
+    <string name="blur_good">Clear Image</string>
+    <string name="blur_bad">Image Blurry</string>
+
+    <string name="more_options">More options</string>
+    <string name="encrypted_status">Encrypted</string>
+    <string name="encryption_status_description">Content encryption status</string>
+    <string name="lock_icon">Lock icon</string>
+
+    <string name="auth_status_description">Authentication status description</string>
+    <string name="app_icon">App icon</string>
+    <string name="content_icon">Content icon</string>
+
 
 </resources>

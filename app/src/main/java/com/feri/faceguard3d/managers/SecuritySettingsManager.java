@@ -32,6 +32,11 @@ public class SecuritySettingsManager {
     private static final String KEY_FIRST_RUN = "first_run";
     private static final String KEY_FACIAL_FEATURES = "facial_features";
     private static final String KEY_HIDDEN_CONTENT = "hidden_content";
+    private static final String KEY_ADAPTIVE_LEARNING = "adaptive_learning";
+    private static final String KEY_MULTI_FACE_DETECTION = "multi_face_detection";
+    private static final String KEY_NOTIFICATION_HIDING = "notification_hiding";
+    private static final String KEY_APP_THUMBNAIL_HIDING = "app_thumbnail_hiding";
+    private static final String DEFAULT_BACKUP_PASSWORD = "FaceGuard123";
 
     private SecuritySettingsManager(Context context) {
         this.context = context.getApplicationContext();
@@ -82,6 +87,13 @@ public class SecuritySettingsManager {
 
     public void setFaceEnrolled(boolean enrolled) {
         securePrefs.edit().putBoolean(KEY_FACE_ENROLLED, enrolled).apply();
+    }
+
+    public void initializeDefaultBackupPassword() {
+        if (getBackupPassword() == null) {
+            String hashedPassword = SecurityUtils.hashPassword(DEFAULT_BACKUP_PASSWORD);
+            setBackupPassword(hashedPassword);
+        }
     }
 
     public void setBackupPassword(String hashedPassword) {
@@ -151,7 +163,7 @@ public class SecuritySettingsManager {
         saveHiddenContents(hiddenContents);
     }
 
-    private void saveHiddenContents(List<HiddenContent> contents) {
+    public void saveHiddenContents(List<HiddenContent> contents) {
         Gson gson = new Gson();
         String json = gson.toJson(contents);
         securePrefs.edit().putString(KEY_HIDDEN_CONTENT, json).apply();
@@ -173,5 +185,37 @@ public class SecuritySettingsManager {
     public static String hashPassword(String password) {
         // Implementarea metodei de hashing
         return SecurityUtils.hashPassword(password);
+    }
+
+    public boolean isAdaptiveLearningEnabled() {
+        return securePrefs.getBoolean(KEY_ADAPTIVE_LEARNING, false);
+    }
+
+    public void setAdaptiveLearningEnabled(boolean enabled) {
+        securePrefs.edit().putBoolean(KEY_ADAPTIVE_LEARNING, enabled).apply();
+    }
+
+    public boolean isMultiFaceDetectionEnabled() {
+        return securePrefs.getBoolean(KEY_MULTI_FACE_DETECTION, true);
+    }
+
+    public void setMultiFaceDetectionEnabled(boolean enabled) {
+        securePrefs.edit().putBoolean(KEY_MULTI_FACE_DETECTION, enabled).apply();
+    }
+
+    public boolean isNotificationHidingEnabled() {
+        return securePrefs.getBoolean(KEY_NOTIFICATION_HIDING, true);
+    }
+
+    public void setNotificationHidingEnabled(boolean enabled) {
+        securePrefs.edit().putBoolean(KEY_NOTIFICATION_HIDING, enabled).apply();
+    }
+
+    public boolean isAppThumbnailHidingEnabled() {
+        return securePrefs.getBoolean(KEY_APP_THUMBNAIL_HIDING, true);
+    }
+
+    public void setAppThumbnailHidingEnabled(boolean enabled) {
+        securePrefs.edit().putBoolean(KEY_APP_THUMBNAIL_HIDING, enabled).apply();
     }
 }

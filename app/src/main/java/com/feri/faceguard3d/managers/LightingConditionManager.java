@@ -14,6 +14,7 @@ import com.feri.faceguard3d.utils.LogUtils;
 import org.opencv.android.Utils;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfDouble;
 import org.opencv.core.MatOfFloat;
 import org.opencv.core.MatOfInt;
 import org.opencv.imgproc.Imgproc;
@@ -135,9 +136,9 @@ public class LightingConditionManager implements SensorEventListener{
             Mat grayMat = new Mat();
             Imgproc.cvtColor(mat, grayMat, Imgproc.COLOR_BGR2GRAY);
 
-            // Calculează valorile medii și deviația standard
-            Mat mean = new Mat();
-            Mat stddev = new Mat();
+            // Folosim MatOfDouble în loc de Mat pentru mean și stddev
+            MatOfDouble mean = new MatOfDouble();
+            MatOfDouble stddev = new MatOfDouble();
             Core.meanStdDev(grayMat, mean, stddev);
 
             double averageBrightness = mean.get(0, 0)[0];

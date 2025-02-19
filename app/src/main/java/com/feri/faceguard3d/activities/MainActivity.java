@@ -134,7 +134,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void initializeApp() {
         if (securityManager.isFirstRun()) {
-            // First time setup
+            // First time setup cu initializare backup password
+            securityManager.initializeDefaultBackupPassword();
             startActivity(new Intent(this, FaceEnrollmentActivity.class));
             finish();
         } else if (!SecurityUtils.isServiceRunning(this, FaceAuthService.class)) {
