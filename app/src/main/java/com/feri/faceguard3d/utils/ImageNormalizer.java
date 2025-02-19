@@ -8,6 +8,7 @@ import org.opencv.android.Utils;
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfDouble;
 import org.opencv.core.MatOfFloat;
 import org.opencv.core.MatOfInt;
 import org.opencv.core.Point;
@@ -146,11 +147,16 @@ public class ImageNormalizer {
         Mat laplacian = new Mat();
         Imgproc.Laplacian(image, laplacian, CvType.CV_64F);
 
-        Mat mean = new Mat();
-        Mat stddev = new Mat();
+        MatOfDouble mean = new MatOfDouble();
+        MatOfDouble stddev = new MatOfDouble();
         Core.meanStdDev(laplacian, mean, stddev);
 
         double variance = Math.pow(stddev.get(0, 0)[0], 2);
+
+        laplacian.release();
+        mean.release();
+        stddev.release();
+
         return (float) variance;
     }
 

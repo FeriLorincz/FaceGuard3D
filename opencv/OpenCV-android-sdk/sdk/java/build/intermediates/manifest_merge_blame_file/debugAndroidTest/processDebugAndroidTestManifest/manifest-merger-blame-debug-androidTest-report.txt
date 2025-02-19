@@ -1,0 +1,69 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="org.opencv.test" >
+4
+5    <uses-sdk
+5-->C:\projects\AI\WithJava\FaceGuard3D\opencv\OpenCV-android-sdk\sdk\java\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest10779346499033842123.xml:5:5-74
+6        android:minSdkVersion="27"
+6-->C:\projects\AI\WithJava\FaceGuard3D\opencv\OpenCV-android-sdk\sdk\java\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest10779346499033842123.xml:5:15-41
+7        android:targetSdkVersion="27" />
+7-->C:\projects\AI\WithJava\FaceGuard3D\opencv\OpenCV-android-sdk\sdk\java\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest10779346499033842123.xml:5:42-71
+8
+9    <instrumentation
+9-->C:\projects\AI\WithJava\FaceGuard3D\opencv\OpenCV-android-sdk\sdk\java\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest10779346499033842123.xml:11:5-15:65
+10        android:name="androidx.test.runner.AndroidJUnitRunner"
+10-->C:\projects\AI\WithJava\FaceGuard3D\opencv\OpenCV-android-sdk\sdk\java\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest10779346499033842123.xml:11:22-76
+11        android:functionalTest="false"
+11-->C:\projects\AI\WithJava\FaceGuard3D\opencv\OpenCV-android-sdk\sdk\java\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest10779346499033842123.xml:14:22-52
+12        android:handleProfiling="false"
+12-->C:\projects\AI\WithJava\FaceGuard3D\opencv\OpenCV-android-sdk\sdk\java\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest10779346499033842123.xml:13:22-53
+13        android:label="Tests for org.opencv.test"
+13-->C:\projects\AI\WithJava\FaceGuard3D\opencv\OpenCV-android-sdk\sdk\java\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest10779346499033842123.xml:15:22-63
+14        android:targetPackage="org.opencv.test" />
+14-->C:\projects\AI\WithJava\FaceGuard3D\opencv\OpenCV-android-sdk\sdk\java\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest10779346499033842123.xml:12:22-61
+15
+16    <permission
+16-->[androidx.core:core:1.9.0] C:\Users\PC\.gradle\caches\transforms-4\a1ff004b3cc668f6483109b380bac867\transformed\core-1.9.0\AndroidManifest.xml:22:5-24:47
+17        android:name="org.opencv.test.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+17-->[androidx.core:core:1.9.0] C:\Users\PC\.gradle\caches\transforms-4\a1ff004b3cc668f6483109b380bac867\transformed\core-1.9.0\AndroidManifest.xml:23:9-81
+18        android:protectionLevel="signature" />
+18-->[androidx.core:core:1.9.0] C:\Users\PC\.gradle\caches\transforms-4\a1ff004b3cc668f6483109b380bac867\transformed\core-1.9.0\AndroidManifest.xml:24:9-44
+19
+20    <uses-permission android:name="org.opencv.test.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+20-->[androidx.core:core:1.9.0] C:\Users\PC\.gradle\caches\transforms-4\a1ff004b3cc668f6483109b380bac867\transformed\core-1.9.0\AndroidManifest.xml:26:5-97
+20-->[androidx.core:core:1.9.0] C:\Users\PC\.gradle\caches\transforms-4\a1ff004b3cc668f6483109b380bac867\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
+21
+22    <application
+22-->C:\projects\AI\WithJava\FaceGuard3D\opencv\OpenCV-android-sdk\sdk\java\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest10779346499033842123.xml:7:5-9:19
+23        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+23-->[androidx.core:core:1.9.0] C:\Users\PC\.gradle\caches\transforms-4\a1ff004b3cc668f6483109b380bac867\transformed\core-1.9.0\AndroidManifest.xml:28:18-86
+24        android:debuggable="true"
+25        android:extractNativeLibs="false" >
+26        <uses-library android:name="android.test.runner" />
+26-->C:\projects\AI\WithJava\FaceGuard3D\opencv\OpenCV-android-sdk\sdk\java\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest10779346499033842123.xml:8:9-60
+26-->C:\projects\AI\WithJava\FaceGuard3D\opencv\OpenCV-android-sdk\sdk\java\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest10779346499033842123.xml:8:23-57
+27
+28        <provider
+28-->[androidx.emoji2:emoji2:1.2.0] C:\Users\PC\.gradle\caches\transforms-4\fc58545756b53250f6487a1c2969f9ba\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+29            android:name="androidx.startup.InitializationProvider"
+29-->[androidx.emoji2:emoji2:1.2.0] C:\Users\PC\.gradle\caches\transforms-4\fc58545756b53250f6487a1c2969f9ba\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
+30            android:authorities="org.opencv.test.androidx-startup"
+30-->[androidx.emoji2:emoji2:1.2.0] C:\Users\PC\.gradle\caches\transforms-4\fc58545756b53250f6487a1c2969f9ba\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
+31            android:exported="false" >
+31-->[androidx.emoji2:emoji2:1.2.0] C:\Users\PC\.gradle\caches\transforms-4\fc58545756b53250f6487a1c2969f9ba\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
+32            <meta-data
+32-->[androidx.emoji2:emoji2:1.2.0] C:\Users\PC\.gradle\caches\transforms-4\fc58545756b53250f6487a1c2969f9ba\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+33                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+33-->[androidx.emoji2:emoji2:1.2.0] C:\Users\PC\.gradle\caches\transforms-4\fc58545756b53250f6487a1c2969f9ba\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
+34                android:value="androidx.startup" />
+34-->[androidx.emoji2:emoji2:1.2.0] C:\Users\PC\.gradle\caches\transforms-4\fc58545756b53250f6487a1c2969f9ba\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+35            <meta-data
+35-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\PC\.gradle\caches\transforms-4\769b457213d752dbf1be2fbb3fb76157\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
+36                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+36-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\PC\.gradle\caches\transforms-4\769b457213d752dbf1be2fbb3fb76157\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
+37                android:value="androidx.startup" />
+37-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\PC\.gradle\caches\transforms-4\769b457213d752dbf1be2fbb3fb76157\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
+38        </provider>
+39    </application>
+40
+41</manifest>

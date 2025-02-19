@@ -2,6 +2,7 @@ package com.feri.faceguard3d.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.PointF;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.Log;
 
@@ -33,18 +34,29 @@ public class FaceRecognitionUtils {
         if (face == null) return false;
 
         // Verifică dimensiunea feței
-        RectF boundingBox = face.getBoundingBox();
+        // Convertim Rect la RectF
+        Rect boundingBoxRect = face.getBoundingBox();
+        RectF boundingBox = new RectF(boundingBoxRect);
         float faceSize = Math.min(boundingBox.width(), boundingBox.height());
+
         if (faceSize < MIN_FACE_SIZE) {
             Log.d(TAG, "Face too small: " + faceSize);
             return false;
         }
 
         // Verifică încrederea detecției
-        if (face.getTrackingConfidence() < MIN_DETECTION_CONFIDENCE) {
-            Log.d(TAG, "Low detection confidence: " + face.getTrackingConfidence());
+        // Înlocuim verificarea tracking confidence cu alte verificări
+        float leftEyeOpen = face.getLeftEyeOpenProbability() != null ?
+                face.getLeftEyeOpenProbability() : 0f;
+        float rightEyeOpen = face.getRightEyeOpenProbability() != null ?
+                face.getRightEyeOpenProbability() : 0f;
+        float detectionConfidence = (leftEyeOpen + rightEyeOpen) / 2.0f;
+
+        if (detectionConfidence < MIN_DETECTION_CONFIDENCE) {
+            Log.d(TAG, "Low detection confidence: " + detectionConfidence);
             return false;
         }
+
 
         // Verifică unghiurile Euler
         if (Math.abs(face.getHeadEulerAngleY()) > MAX_EULER_Y ||

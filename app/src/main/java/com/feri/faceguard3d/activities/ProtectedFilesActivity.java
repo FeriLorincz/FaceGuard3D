@@ -33,7 +33,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class ProtectedFilesActivity extends AppCompatActivity implements PrtectedFilesActivity.FileActionListener {
+public class ProtectedFilesActivity extends AppCompatActivity implements ProtectedFilesAdapter.FileActionListener {
 
     private ActivityProtectedFilesBinding binding;
     private SecuritySettingsManager securityManager;

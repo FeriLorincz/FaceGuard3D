@@ -30,6 +30,7 @@ public class FaceDetectionService extends Service{
     private ContentHidingManager contentHidingManager;
     private SecuritySettingsManager securityManager;
     private boolean isProcessing = false;
+    private static boolean multipleFacesDetected = false;
 
     // Constante pentru validarea poziției feței
     private static final float MAX_EULER_Y = 36.0f; // Grade pentru rotația stânga-dreapta
@@ -107,7 +108,13 @@ public class FaceDetectionService extends Service{
         boolean isXValid = rotX <= MAX_EULER_X;
 
         // Verifică și probabilitatea de detecție
-        boolean isConfident = face.getTrackingConfidence() >= 0.85f;
+        // Folosim deschiderea ochilor și alte proprietăți pentru încredere
+        float leftEyeOpen = face.getLeftEyeOpenProbability() != null ?
+                face.getLeftEyeOpenProbability() : 0f;
+        float rightEyeOpen = face.getRightEyeOpenProbability() != null ?
+                face.getRightEyeOpenProbability() : 0f;
+
+        boolean isConfident = (leftEyeOpen + rightEyeOpen) / 2.0f >= 0.85f;
 
         return isYValid && isZValid && isXValid && isConfident;
     }
@@ -117,7 +124,7 @@ public class FaceDetectionService extends Service{
 
         // Setează caracteristicile detectate
         features.setLightingCondition(lightingCondition);
-        features.setConfidence(face.getTrackingConfidence());
+        features.setConfidence(calculateFaceConfidence(face));
         features.setHasGlasses(false); // Se va implementa logic pentru detectarea ochelarilor
         features.setHasBeard(false);   // Se va implementa logic pentru detectarea bărbii
 
@@ -166,6 +173,29 @@ public class FaceDetectionService extends Service{
         super.onDestroy();
         executorService.shutdown();
         detector.close();
+    }
+
+    public static boolean areMultipleFacesDetected() {
+        return multipleFacesDetected;
+    }
+
+    public static void setMultipleFacesDetected(boolean detected) {
+        multipleFacesDetected = detected;
+    }
+
+    // Vom actualiza această variabilă în timpul procesării imaginii
+    private void handleFaceDetectionResult(List<Face> faces) {
+        setMultipleFacesDetected(faces.size() > 1);
+        // restul codului existent
+    }
+
+    private float calculateFaceConfidence(Face face) {
+        float eyeOpenScore = ((face.getLeftEyeOpenProbability() != null ?
+                face.getLeftEyeOpenProbability() : 0f) +
+                (face.getRightEyeOpenProbability() != null ?
+                        face.getRightEyeOpenProbability() : 0f)) / 2.0f;
+
+        return eyeOpenScore;
     }
 
 }

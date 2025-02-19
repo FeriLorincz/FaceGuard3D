@@ -88,7 +88,7 @@ public class ContentHidingService extends Service {
     }
 
     private void startPeriodicCheck() {
-        scheduledExecutor.scheduleAtFixedRate(() -> {
+        scheduledExecutor.scheduleWithFixedDelay(() -> {
             if (securityManager.isMultiFaceDetectionEnabled()) {
                 checkForMultipleFaces();
             }

@@ -151,9 +151,18 @@ public class FaceAuthService extends Service{
         float rotZ = Math.abs(face.getHeadEulerAngleZ());  // Înclinare
         float rotX = Math.abs(face.getHeadEulerAngleX());  // Sus-jos
 
-        // Limitele acceptabile pentru unghiurile Euler
-        return rotY <= 36.0f && rotZ <= 36.0f && rotX <= 36.0f &&
-                face.getTrackingConfidence() >= 0.85f;
+        // Verificăm și deschiderea ochilor ca indicator suplimentar
+        float leftEyeOpen = face.getLeftEyeOpenProbability() != null ?
+                face.getLeftEyeOpenProbability() : 0f;
+        float rightEyeOpen = face.getRightEyeOpenProbability() != null ?
+                face.getRightEyeOpenProbability() : 0f;
+
+        // Limitele acceptabile pentru unghiurile Euler și deschiderea ochilor
+        return rotY <= 36.0f &&
+                rotZ <= 36.0f &&
+                rotX <= 36.0f &&
+                leftEyeOpen >= 0.5f &&
+                rightEyeOpen >= 0.5f;
     }
 
     private FacialFeatures extractFacialFeatures(Face face, ImageProxy image) {
@@ -170,7 +179,9 @@ public class FaceAuthService extends Service{
 
             // Creează obiectul FacialFeatures
             FacialFeatures features = new FacialFeatures();
-            features.setConfidence(face.getTrackingConfidence());
+            // Calculăm un scor de încredere bazat pe mai mulți factori
+            float confidence = calculateConfidenceScore(face);
+            features.setConfidence(confidence);
             features.setLightingCondition(lightingCondition);
 
             // Setează poziția 3D
@@ -272,5 +283,15 @@ public class FaceAuthService extends Service{
             }
         }
         return false;
+    }
+
+    private float calculateConfidenceScore(Face face) {
+        float leftEyeOpen = face.getLeftEyeOpenProbability() != null ?
+                face.getLeftEyeOpenProbability() : 0f;
+        float rightEyeOpen = face.getRightEyeOpenProbability() != null ?
+                face.getRightEyeOpenProbability() : 0f;
+
+        // Calculăm un scor compus
+        return (leftEyeOpen + rightEyeOpen) / 2.0f;
     }
 }

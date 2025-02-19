@@ -156,7 +156,7 @@ public class MultiFaceEnrollmentManager {
             features.setPose3D(pose3D);
 
             // Set confidence
-            features.setConfidence(face.getTrackingConfidence());
+            features.setConfidence(face.getSmilingProbability() != null ? face.getSmilingProbability() : 0.0f);
 
             // Calculate lighting condition
             float lightingCondition = calculateLightingCondition(alignedFace);
@@ -229,7 +229,7 @@ public class MultiFaceEnrollmentManager {
         features.setPose3D(pose3D);
 
         // Set tracking confidence
-        features.setConfidence(face.getTrackingConfidence());
+        features.setConfidence(face.getSmilingProbability() != null ? face.getSmilingProbability() : 0.0f);
 
         return features;
     }

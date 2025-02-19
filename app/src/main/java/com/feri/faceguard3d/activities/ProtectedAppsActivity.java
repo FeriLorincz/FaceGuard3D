@@ -24,7 +24,7 @@ import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class ProtectedAppsActivity extends AppCompatActivity implements AppListAdapter.AppListListener {
+public class ProtectedAppsActivity extends AppCompatActivity implements AppListAdapter.AppSelectionListener {
 
     private ActivityProtectedAppsBinding binding;
     private SecuritySettingsManager securityManager;

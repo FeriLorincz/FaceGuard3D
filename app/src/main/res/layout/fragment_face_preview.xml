@@ -42,18 +42,21 @@
             android:id="@+id/chipPose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/pose_good"
             android:checkable="false" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chipLighting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/lighting_good"
             android:checkable="false" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chipBlur"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/blur_good"
             android:checkable="false" />
 
     </com.google.android.material.chip.ChipGroup>

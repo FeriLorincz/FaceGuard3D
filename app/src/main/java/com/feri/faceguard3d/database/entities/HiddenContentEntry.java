@@ -1,5 +1,6 @@
 package com.feri.faceguard3d.database.entities;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.ColumnInfo;
@@ -15,6 +16,7 @@ public class HiddenContentEntry {
 
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "id")
+    @NonNull
     private String id;
 
     @ColumnInfo(name = "original_path")

@@ -175,6 +175,52 @@ public class ContentHidingManager {
         }
     }
 
+    public void revealContent(HiddenContent content) {
+        if (!content.isEncrypted()) {
+            return;
+        }
+
+        executor.execute(() -> {
+            try {
+                File hiddenFile = new File(content.getHiddenPath());
+                File originalFile = new File(content.getOriginalPath());
+
+                // Decriptează și mută fișierul înapoi
+                if (decryptAndMoveFile(hiddenFile, originalFile)) {
+                    content.setHiddenPath(null);
+                    content.setEncrypted(false);
+                    updateHiddenContent(content);
+                }
+            } catch (Exception e) {
+                Log.e(TAG, "Error revealing content", e);
+            }
+        });
+    }
+
+    public void hideContent(HiddenContent content) {
+        if (content.isEncrypted()) {
+            return;
+        }
+
+        executor.execute(() -> {
+            try {
+                File originalFile = new File(content.getOriginalPath());
+                String encryptedName = SecurityUtils.generateEncryptedFileName();
+                File hiddenFile = new File(hiddenFolderPath, encryptedName);
+
+                // Copiază și criptează fișierul
+                if (moveAndEncryptFile(originalFile, hiddenFile)) {
+                    content.setHiddenPath(hiddenFile.getAbsolutePath());
+                    content.setEncrypted(true);
+                    updateHiddenContent(content);
+                }
+            } catch (Exception e) {
+                Log.e(TAG, "Error hiding content", e);
+            }
+        });
+    }
+
+
     private boolean moveAndEncryptFile(File source, File destination) {
         try {
             FileInputStream inStream = new FileInputStream(source);
@@ -240,8 +286,7 @@ public class ContentHidingManager {
         securityManager.saveHiddenContents(contents);
     }
 
-    public void addProtectedContent(String path, HiddenContent.ContentType type) {
-        HiddenContent content = new HiddenContent(path, type, new File(path).getName());
+    public void addProtectedContent(HiddenContent content) {
         List<HiddenContent> contents = securityManager.getHiddenContents();
         contents.add(content);
         securityManager.saveHiddenContents(contents);
