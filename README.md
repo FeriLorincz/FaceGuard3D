@@ -28,15 +28,6 @@ FaceGuard3D is an innovative Android security application that uses advanced 3D 
 - **Lighting Adaptation**: Works effectively in various lighting conditions
 - **Backup Authentication**: Password fallback when facial authentication isn't possible
 
-## 📱 Screenshots
-
-<p align="center">
-  <img src="screenshots/screen1.png" width="200" />
-  <img src="screenshots/screen2.png" width="200" /> 
-  <img src="screenshots/screen3.png" width="200" />
-  <img src="screenshots/screen4.png" width="200" />
-</p>
-
 ## 🔧 Technology Stack
 
 - **Language**: Java for Android
